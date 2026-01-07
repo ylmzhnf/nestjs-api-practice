@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+ # Veritabani Servisi
+  db:
+    image: postgres:13
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: 969696
+      POSTGRES_DB: nestjs
+    ports:
+      - "5434:5432"
+    # VERİLERİ KAYDETMEK İÇİN:
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+volumes:
+  postgres_data:
+        
