@@ -8,6 +8,4 @@ import { PrismaModule } from "../prisma/prisma.module.js";
     controllers: [AuthController],
     providers: [AuthService]
 })
-export class AuthModule {
-    
-}
+export class AuthModule {}
