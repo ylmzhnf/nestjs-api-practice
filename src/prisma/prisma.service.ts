@@ -7,8 +7,13 @@ import { PrismaPg } from '@prisma/adapter-pg'
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit, OnModuleDestroy{
     constructor() {
+        // Ensure DATABASE_URL is set at runtime
+        const connectionString = process.env.DATABASE_URL;
+        if (!connectionString) {
+            throw new Error('DATABASE_URL is not set. Please add it to your environment or .env file.');
+        }
         // Provide an adapter for Prisma 7 'client' engine (Postgres in schema)
-        super({ adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL ?? '' }) } as any);
+        super({ adapter: new PrismaPg({ connectionString }) } as any);
     }
     async onModuleInit() {
         await this.$connect()
