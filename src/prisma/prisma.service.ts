@@ -6,6 +6,7 @@ import { PrismaPg } from '@prisma/adapter-pg'
 
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit, OnModuleDestroy{
+ 
     constructor() {
         // Ensure DATABASE_URL is set at runtime
         const connectionString = process.env.DATABASE_URL;
@@ -20,5 +21,11 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
     }
     async onModuleDestroy() {
         await this.$disconnect()
+    }
+    async cleanDb(){
+        return this.$transaction([
+            this.bookmark.deleteMany(),
+            this.user.deleteMany(),
+        ])
     }
 }

@@ -1,6 +1,6 @@
 version: '3.8'
 services:
- # Veritabani Servisi
+  # Veritabani Servisi
   db:
     image: postgres:13
     container_name: postgres_db
@@ -10,10 +10,20 @@ services:
       POSTGRES_PASSWORD: 969696
       POSTGRES_DB: nestjs
     ports:
-      - "5434:5432"
-    # VERİLERİ KAYDETMEK İÇİN:
+      - '5434:5432'
     volumes:
       - postgres_data:/var/lib/postgresql/data
+  # Test Veritabani Servisi
+
+  test-db:
+    image: postgres:13
+    container_name: postgres_db_test
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: 969696
+      POSTGRES_DB: nestjs_test
+    ports:
+      - '5435:5432'
 volumes:
   postgres_data:
-        
